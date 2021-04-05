@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
 
-const config = require("configuration").getConfig()
+const config = require("configuration").swagger()
 
 const directoryPath = path.join(__dirname, '../../router/api');
 const pathes = [];
@@ -61,9 +61,7 @@ const options = {
                 description: 'for testing and sending emails ',
             },
         ],
-        schemes: [config.SCHEME],
-        host: `${config.HOST}:${process.env.PORT}`,
-        basePath: config.BASE_PATH,
+        ...config
     },
 
     apis: pathes,

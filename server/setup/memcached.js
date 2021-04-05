@@ -1,39 +1,43 @@
-const Memcached = require('memcached');
+const memjs = require('memjs');
 
-const memcached = new Memcached()
+const options = require("configuration").memjsOptions()
 
-memcached.connect(process.env.MEMCACHIER_SERVERS, function (err, conn) {
+var memcached = memjs.Client.create(process.env.MEMCACHIER_SERVERS, {
+    failover: true,
+    timeout: 1,
+    keepAlive: true,
+    ...options
+})
+
+memcached.flush(function (err) {
     if (err) {
-        console.log(conn.server, 'error while memcached connection!!');
+        console.error('memcached', 'flush', err);
+    } else {
+        console.log('memcached', 'flush', 'successful');
     }
 });
 
 memcached.asyncGet = (key) => {
     return new Promise((resolve, reject) => {
-        memcached.get(key, (err, data) => {
-            if (err || !data) {
+        memcached.get(key, (err, buffer) => {
+            if (err != null) {
                 return reject(err)
             }
-            resolve(data)
+            if (buffer != null) {
+                let data = JSON.parse(buffer.toString())
+                return resolve(data)
+            }
+            reject("value is null")
         })
     })
 }
 
-memcached.asyncGetMulti = (keys) => {
+memcached.asyncSet = (key, value, options = { expires: 3600 }) => {
     return new Promise((resolve, reject) => {
-        memcached.getMulti(keys, (err, data) => {
-            if (err) {
-                return reject(err)
-            }
-            resolve(data)
-        })
-    })
-}
 
-memcached.asyncSet = (key, value, time = 3600) => {
-    return new Promise((resolve, reject) => {
-        memcached.set(key, value, time, (err, data) => {
-            if (err) {
+        let stringValue = JSON.stringify(value)
+        memcached.set(key, stringValue, options, (err, data) => {
+            if (err != null) {
                 return reject(err)
             }
             resolve(data)

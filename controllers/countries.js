@@ -7,10 +7,8 @@ module.exports = {
 
             let memcached = req.app.get('memcached')
 
-
             let countries = await db.asyncAll(`SELECT * FROM countries`)
             await memcached.asyncSet('countries', countries)
-
 
             return res.status(200).json({ countries })
 

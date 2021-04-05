@@ -12,12 +12,14 @@ function get(key, param = "") {
 
         memcached.asyncGet(cacheKey)
             .then(data => {
-                return res.status(200).json({ key: data })
-            })
-            .catch(() => {
+                if (data != null) {
+                    return res.status(200).json({ key: data })
+                }
                 return next()
             })
-
+            .catch((err) => {
+                return next()
+            })
     }
 }
 
