@@ -7,7 +7,6 @@ const swaggerUi = require('swagger-ui-express');
 
 const fs = require('fs');
 const path = require('path');
-const _ = require('lodash');
 
 const config = require("configuration").swagger()
 
@@ -28,7 +27,8 @@ function getFullPathes(names) {
         if (name !== 'index') {
             customePath = `./router/api/${name}`;
         }
-        if (!(_.isUndefined(name))) {
+
+        if (typeof name === "string" && name !== "") {
             pathes.push(customePath);
         }
     });

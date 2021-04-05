@@ -16,8 +16,6 @@
     "express-joi-validation": "^5.0.0",
     "helmet": "^4.4.1",
     "joi": "^17.4.0",
-    "lodash": "^4.17.21",
-    "memcached": "^2.2.2",
     "memjs": "^1.3.0",
     "module-alias": "^2.2.2",
     "sqlite3": "^5.0.2",
