@@ -46,7 +46,13 @@ const createDatabase = async (db) => {
 
     try {
 
-        if (!fs.existsSync(path.resolve(__dirname, "../../data/data.json")) || fs.existsSync(path.resolve(__dirname, "../../data/kaggle.db"))) {
+        if (!fs.existsSync(path.resolve(__dirname, "../../data/data.json"))) {
+            return
+        }
+
+        let tables = await db.asyncAll("SELECT name FROM sqlite_master WHERE type='table' AND name='countries'")
+
+        if (tables.length && tables[0].name === "countries") {
             return
         }
 
@@ -120,6 +126,7 @@ const createDatabase = async (db) => {
 
         await db.asyncRun(insertIntoEmmissionRecords)
 
+        console.log("db created successfully")
         Promise.resolve('created')
 
     } catch (err) {
@@ -133,11 +140,12 @@ let db = new sqlite3.Database(path.resolve(__dirname, "../../data/kaggle.db"), e
         console.log("database connection err: ", err)
         return
     }
+
+    attachAsyncFunctionality(db)
+
+    createDatabase(db)
+
     console.log("database connected successfully")
 })
-
-attachAsyncFunctionality(db)
-
-createDatabase(db)
 
 module.exports = db
