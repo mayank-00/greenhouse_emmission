@@ -1,3 +1,6 @@
 {
-    "PORT": 3005
+    "PORT": 3005,
+    "SCHEME": "http",
+    "HOST": "localhost",
+    "BASE_PATH": "/api/v1"
 }

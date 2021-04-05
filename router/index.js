@@ -1,5 +1,7 @@
 const router = require('express').Router();
 
-router.use('/api/v1', require('./api'));
+const config = require("configuration").getConfig()
+
+router.use(config.BASE_PATH, require('./api'));
 
 module.exports = router;

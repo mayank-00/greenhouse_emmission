@@ -1,3 +1,6 @@
 {
-    "PORT": 3005
+    "PORT": 3005,
+    "SCHEME": "https",
+    "HOST": "greenhouse-emmission.herokuapp.com",
+    "BASE_PATH": "/api/v1"
 }

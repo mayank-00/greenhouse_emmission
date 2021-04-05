@@ -8,6 +8,7 @@ const swaggerUi = require('swagger-ui-express');
 const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
+
 const config = require("configuration").getConfig()
 
 const directoryPath = path.join(__dirname, '../../router/api');
@@ -60,9 +61,9 @@ const options = {
                 description: 'for testing and sending emails ',
             },
         ],
-        schemes: ['http'],
-        host: `localhost:${config.PORT}`,
-        basePath: '/api/v1',
+        schemes: ['http', 'https'],
+        host: `${config.HOST}:${process.env.PORT}`,
+        basePath: config.BASE_PATH,
     },
 
     apis: pathes,
