@@ -6,7 +6,7 @@
 * [Setup](#setup)
 
 ## General info
-This is a nodejs project build around greenhouse emmission data fetched from kaggle. The apis are documented with swagger.
+This is a nodejs project build around greenhouse emmission data fetched from kaggle. The apis are documented with OpenAPI specifications.
 	
 ## Technologies
 Project is created with:
@@ -14,7 +14,7 @@ Project is created with:
 * express
 * sqlite3
 * memcached
-* swagger
+* swagger-ui
 	
 ## Setup
 To run this project, install it locally using npm:
