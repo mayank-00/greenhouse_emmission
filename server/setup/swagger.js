@@ -61,7 +61,7 @@ const options = {
                 description: 'for testing and sending emails ',
             },
         ],
-        schemes: ['http', 'https'],
+        schemes: [config.SCHEME],
         host: `${config.HOST}:${process.env.PORT}`,
         basePath: config.BASE_PATH,
     },

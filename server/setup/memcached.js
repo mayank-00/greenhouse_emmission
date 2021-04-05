@@ -2,7 +2,7 @@ const Memcached = require('memcached');
 
 const memcached = new Memcached()
 
-memcached.connect('localhost:11211', function (err, conn) {
+memcached.connect(process.env.MEMCACHIER_SERVERS, function (err, conn) {
     if (err) {
         console.log(conn.server, 'error while memcached connection!!');
     }
