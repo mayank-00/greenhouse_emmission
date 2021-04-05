@@ -17,9 +17,7 @@ Project is created with:
 * swagger-ui
 	
 ## Setup
-To run this project, install it locally using npm:
-
-Clone this repo to your system and run npm install to install all the dependencies.
+Clone this repo to your system and run ```npm install``` to install all the dependencies.
 You also need to install sqlite3 and memcached on your machine.
 
 ## Usage
